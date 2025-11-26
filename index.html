@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>沖縄旅行スケジュール</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        .schedule-container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .day-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        .day-header:hover {
+            background-color: #0056b3;
+        }
+
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s;
+        }
+
+        .day-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.3s;
+            background-color: #ffffff;
+            border-left: 5px solid #007bff;
+            padding: 0 20px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .day-content.active {
+            max-height: 2000px; /* 十分な高さを設定 */
+            padding: 15px 20px;
+        }
+
+        .event {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .event:last-child {
+            border-bottom: none;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #007bff;
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        .details {
+            padding-left: 15px;
+            border-left: 2px solid #ccc;
+        }
+
+        .note {
+            font-size: 0.9em;
+            color: #e44d26;
+            margin-top: 5px;
+        }
+
+        .flight-info, .car-rental-info {
+            background-color: #e6f0ff;
+            padding: 8px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        /* 補足情報セクション */
+        .info-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="schedule-container">
+    <h1>🌴 沖縄旅行スケジュール (2025/11/27 - 11/30)</h1>
+
+    <div class="info-box">
+        <h4>🚨 移動情報 (メモ)</h4>
+        <p>
+            **ホテル～レンタカー**: 81km, 1時間30分<br>
+            **ホテル～知念岬**: 83km, 1時間30分
+        </p>
+    </div>
+
+    <div class="day-header" onclick="toggleDayContent(this)">
+        <span>🗓️ 2025/11/27 (木) - 移動日・那覇・北部ホテルへ</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="day-content">
+        <div class="event">
+            <div class="time">9:00</div>
+            <div class="details">自宅出発 <span class="note">(30min)</span></div>
+        </div>
+        <div class="event">
+            <div class="time">11:35</div>
+            <div class="details flight-info">
+                **新潟空港発** ANA 1865便
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">14:40</div>
+            <div class="details flight-info">
+                **那覇空港着**
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">15:10</div>
+            <div class="details car-rental-info">
+                **Nレンタカー那覇空港店**<br>
+                トヨタ・アルファード借り受け
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">15:30</div>
+            <div class="details">レンタカー出発</div>
+        </div>
+        <div class="event">
+            <div class="time">16:00</div>
+            <div class="details">**国際通り観光**</div>
+        </div>
+        <div class="event">
+            <div class="time">17:00</div>
+            <div class="details">出発</div>
+        </div>
+        <div class="event">
+            <div class="time">18:00</div>
+            <div class="details">
+                **夕食/外食** ＠＿＿<br>
+                <span class="note">＊翌日の朝食買い出し</span>
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">20:00</div>
+            <div class="details highlight">
+                **カヌチャベイホテル＆ヴィラズ** 到着<br>
+                <span class="note">⚠️ 18:00チェックイン遅延の連絡必要</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-header" onclick="toggleDayContent(this)">
+        <span>🗓️ 2025/11/28 (金) - 南部観光・美浜</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="day-content">
+        <div class="event">
+            <div class="time">8:00</div>
+            <div class="details">ホテル出発</div>
+        </div>
+        <div class="event">
+            <div class="time">10:00</div>
+            <div class="details">**知念岬公園**</div>
+        </div>
+        <div class="event">
+            <div class="time">11:00</div>
+            <div class="details">
+                **斎場御嶽**<br>
+                （ニライ・カナイ橋）
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">12:00</div>
+            <div class="details">
+                **美浜アメリカンビレッジ**<br>
+                昼食/外食<br>
+                <span class="note">＊翌日の朝食買い出し</span>
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">20:00</div>
+            <div class="details highlight">
+                **夕食/ホテル** ＠パラディータ
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">23:59</div>
+            <div class="details note">
+                ＊＊帰り便の座席指定＊＊
+            </div>
+        </div>
+    </div>
+
+    <div class="day-header" onclick="toggleDayContent(this)">
+        <span>🗓️ 2025/11/29 (土) - 北部観光（美ら海・古宇利島）</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="day-content">
+        <div class="event">
+            <div class="time">7:30</div>
+            <div class="details">ホテル出発</div>
+        </div>
+        <div class="event">
+            <div class="time">8:00</div>
+            <div class="details">
+                **朝食/外食** ＠**Ａ＆Ｗ名護店**
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">9:30</div>
+            <div class="details">
+                **瀬底ビーチ** <span class="note">(30min)</span>
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">10:15</div>
+            <div class="details highlight">
+                **ちゅら海水族館** <span class="note">(3h)</span>
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">14:00</div>
+            <div class="details">
+                **昼食/外食** ＠**沖縄そば いち藤**
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">15:00</div>
+            <div class="details">
+                **古宇利大橋**
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">16:00</div>
+            <div class="details">
+                **名護ドン・キホーテ**<br>
+                <span class="note">＊翌日の朝食買い出し</span>
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">19:00</div>
+            <div class="details highlight">
+                **夕食/外食** ＠**とびきりステーキ**
+            </div>
+        </div>
+    </div>
+
+    <div class="day-header" onclick="toggleDayContent(this)">
+        <span>🗓️ 2025/11/30 (日) - 帰路</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="day-content">
+        <div class="event">
+            <div class="time">8:00</div>
+            <div class="details">
+                ホテル出発<br>
+                <span class="note">＊ガソリン給油</span>
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">9:30</div>
+            <div class="details car-rental-info">
+                **Nレンタカー那覇空港店**<br>
+                アルファード返却 <span class="note">(13:25期限)</span>
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">10:15</div>
+            <div class="details">
+                那覇空港（バス移動）<br>
+                昼食/空港内
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">13:25</div>
+            <div class="details flight-info">
+                **チェックイン**
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">14:25</div>
+            <div class="details flight-info">
+                **那覇空港発** ANA 1866便
+            </div>
+        </div>
+        <div class="event">
+            <div class="time">16:50</div>
+            <div class="details flight-info">
+                **新潟空港着**
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScriptで開閉機能（アコーディオン）を実装
+    function toggleDayContent(header) {
+        // 現在クリックされたヘッダーの次の要素（コンテンツ部分）を取得
+        const content = header.nextElementSibling;
+        const icon = header.querySelector('.toggle-icon');
+
+        // コンテンツが開いているか確認
+        if (content.classList.contains('active')) {
+            // 閉じるとき
+            content.classList.remove('active');
+            icon.style.transform = 'rotate(0deg)'; // アイコンを元に戻す
+        } else {
+            // 開くとき
+            // 他の開いているコンテンツをすべて閉じる (オプション)
+            document.querySelectorAll('.day-content.active').forEach(item => {
+                item.classList.remove('active');
+                item.previousElementSibling.querySelector('.toggle-icon').style.transform = 'rotate(0deg)';
+            });
+
+            // 現在のコンテンツを開く
+            content.classList.add('active');
+            icon.style.transform = 'rotate(180deg)'; // アイコンを回転
+        }
+    }
+
+    // 初期状態で1日目を開いておく
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const firstHeader = document.querySelector('.day-header');
+        if (firstHeader) {
+            firstHeader.click();
+        }
+    });
+</script>
+
+</body>
+</html>
