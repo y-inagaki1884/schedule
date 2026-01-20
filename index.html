@@ -1,121 +1,430 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>沖縄旅行スケジュール</title>
+    <title>CN教育 受講詳細スケジュール</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px;
-            background-color: #f4f7f6;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.6;
             color: #333;
-        }
-
-        .schedule-container {
             max-width: 900px;
-            margin: auto;
-            background: white;
+            margin: 40px auto;
             padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: #f4f7f6;
         }
 
-        .day-header {
-            background-color: #007bff;
-            color: white;
-            padding: 15px 20px;
-            margin-top: 15px;
+        .card {
+            background: white;
+            padding: 30px;
             border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.2em;
-            transition: background-color 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .day-header:hover {
-            background-color: #0056b3;
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 10px;
+            font-size: 24px;
         }
 
-        .toggle-icon {
-            font-size: 1.5em;
-            transition: transform 0.3s;
+        h2 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-top: 30px;
+            border-left: 5px solid #27ae60;
+            padding-left: 10px;
         }
 
-        .day-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.3s;
-            background-color: #ffffff;
-            border-left: 5px solid #007bff;
-            padding: 0 20px;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-        }
-
-        .day-content.active {
-            max-height: 2000px; /* 十分な高さを設定 */
-            padding: 15px 20px;
-        }
-
-        .event {
-            display: flex;
-            align-items: flex-start;
-            padding: 10px 0;
-            border-bottom: 1px dashed #eee;
-        }
-
-        .event:last-child {
-            border-bottom: none;
-        }
-
-        .time {
-            font-weight: bold;
-            color: #007bff;
-            width: 80px;
-            flex-shrink: 0;
-        }
-
-        .details {
-            padding-left: 15px;
-            border-left: 2px solid #ccc;
-        }
-
-        .note {
-            font-size: 0.9em;
-            color: #e44d26;
-            margin-top: 5px;
-        }
-
-        .flight-info, .car-rental-info {
-            background-color: #e6f0ff;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-
-        .highlight {
-            font-weight: bold;
-            color: #28a745;
-        }
-
-        /* 補足情報セクション */
-        .info-box {
-            background-color: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 15px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
-            border-radius: 8px;
-            font-size: 0.95em;
+            background-color: #fff;
         }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        .link-btn {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-btn:hover {
+            text-decoration: underline;
+        }
+        .link-btn2 {
+            color: #097c53;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-btn2:hover {
+            text-decoration: underline;
+        }
+        /* ガントチャート風スタイル */
+        .gantt-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .gantt-table {
+            width: 100%;
+            min-width: 700px;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .gantt-table th {
+            background: #34495e;
+            color: white;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .gantt-table td {
+            height: 50px;
+            position: relative;
+            border: 1px solid #eee;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .bar-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bar-period {
+            background-color: #27ae60;
+            height: 24px;
+            border-radius: 12px;
+            position: absolute;
+            top: 13px;
+            left: 15%;
+            /* 1/26開始想定 */
+            width: 70%;
+            /* 4週間分想定 */
+            color: white;
+            line-height: 24px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .date-label {
+            font-size: 18px;
+            color: #570ce4;
+        }
+        /* アコーディオン */
+        .accordion {
+            background-color: #34495e; color: white; cursor: pointer; padding: 15px; width: 100%;
+            border: none; text-align: left; outline: none; font-size: 16px; border-radius: 5px;
+            margin-top: 20px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .accordion:after { content: '\002B'; font-weight: bold; }
+        .active:after { content: "\2212"; }
+        .panel { display: none; background-color: white; overflow: hidden; border: 1px solid #ddd; border-top: none; max-height: 600px; overflow-y: auto; }
+        
+        .list-table th { background-color: #edf2f7; color: #2d3748; }
+        .badge { background: #e74c3c; color: white; padding: 2px 8px; border-radius: 10px; font-size: 12px; margin-left: 10px; }
     </style>
 </head>
+
 <body>
 
-close
+    <div class="card">
+        <h1>CNに関する社内教育（2026年度上期）詳細案内</h1>
 
+        <h2>1. 受講対象者</h2>
+        <ul>
+            <li><strong>全国の従業員：</strong> 主任職以上</li>
+            <li><strong>工場勤務者：</strong> 班長職以上</li>
+        </ul>
+        <section>
+        
+        <p style="font-size: 13px; color: #666;">氏名が掲載されている方は必ず受講期間内に完了させてください。</p>
+        <button class="accordion">名簿をすべて展開する <span class="badge">157名</span></button>
+        <div class="panel">
+            <table class="list-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">No</th>
+                        <th>所属部門</th>
+                        <th>部門補助</th>
+                        <th>役職</th>
+                        <th>氏名</th>
+                    </tr>
+                </thead>
+                <tbody id="member-list">
+                    </tbody>
+            </table>
+        </div>
+    </section>
+        <h2>2. 受講内容・各フォームURL</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">項目</th>
+                    <th>一般（主任以上）用URL</th>
+                    <th>工場（班長以上）用URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. 教育動画視聴</strong></td>
+                    <td colspan="2" >
+                        <ul>
+                            <li><strong><a
+                                        href="https://mskitamurass.sharepoint.com/:v:/s/CN495/IQDVa-OAIUjxTrIga4w9M0jWAd4FZRUHxZyCNy7-E90IDg4?e=GvX5OK"
+                                        target="_blank"class="link-btn">▶ 【字幕なし】</a>
+                                </strong></li>
+                            <li><a href="https://mskitamurass.sharepoint.com/:v:/s/CN495/IQBYmAx8iSNZQaOS1KejA-eCAWrfdwBKbFN6RzC3tvbpLGc?e=E2HE5a"
+                                    target="_blank"class="link-btn">▶ 【字幕付き】音声が聞きづらい場合に推奨</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>2. 理解度チェック</strong></td>
+                    <td><a href="https://forms.office.com/r/N1ezabN1c0"target="_blank"
+                            class="link-btn">回答フォーム（一般）</a></td>
+                    <td><a href="https://forms.office.com/r/n5AUhJ4Q7r"target="_blank"
+                            class="link-btn2">回答フォーム（工場）</a></td>
+                </tr>
+                <tr>
+                    <td><strong>3. アンケート</strong></td>
+                    <td><a href="https://forms.office.com/r/JqJ6txwBd3"target="_blank"
+                            class="link-btn">回答フォーム（一般）</a></td>
+                    <td><a href="https://forms.office.com/r/1W41ivQcV5"target="_blank"
+                            class="link-btn2">回答フォーム（工場）</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 25px; font-size: 1.5em; color: #c0392b;">
+            ※工場のPCを利用する方は、工場用の回答フォームから回答してください。
+        </p>
+        <p style="margin-top: 25px; font-size: 1.5em; color: #c0392b;">
+            　所属する”班”の選択と、氏名の記入をお願いします。
+        </p>
+        <h2>3. 実施スケジュール（4週間）</h2>
+        <div class="gantt-container">
+            <table class="gantt-table">
+                <thead>
+                    <tr>
+                        <th style="width: 150px;">2026年</th>
+                        <th>1月 第4週</th>
+                        <th>2月 第1週</th>
+                        <th>2月 第2週</th>
+                        <th>2月 第3週</th>
+                        <th>2月 第4週</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="date-label">1/26(月)～2/20(金)</td>
+                        <td colspan="5">
+                            <div class="bar-wrapper">
+                                <div class="bar-period">全対象者：受講・回答期間（4週間）</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="margin-top: 25px; font-size: 0.9em; color: #c0392b;">
+            ※期限間際は混雑が予想されます。余裕を持った受講をお願いいたします。
+        </p>
+    </div>
+<script>
+    // CSVデータ全157名分
+    const members = [
+    ["1","システム開発部","業務システム課","主任","篠原卓"], 
+    ["2","システム開発部","情報システム課","課長","山田肇"], 
+    ["3","システム開発部","情報システム課","主任","小山奈美子"], 
+    ["4","システム開発部","部長","部長","内山一彦"], 
+    ["5","産業機械事業部","S-6班","班長","石塚賢二"], 
+    ["6","産業機械事業部","営業課","主任","平松光貴"], 
+    ["7","産業機械事業部","技術課","課長","豊﨑信人"], 
+    ["8","産業機械事業部","技術課","課長","加藤達也"], 
+    ["9","産業機械事業部","技術課","係長","阿部良平"], 
+    ["10","産業機械事業部","技術課","主任","長谷亮介"], 
+    ["11","産業機械事業部","資材課","課長","吉澤剛志"], 
+    ["12","産業機械事業部","次長","次長","齋藤大祐"], 
+    ["13","産業機械事業部","製造課","課長","高橋保"], 
+    ["14","産業機械事業部","部長","部長","野崎慎也"], 
+    ["15","資材部","S-1班","班長","小熊貴志"], 
+    ["16","資材部","資材１課","係長","藤田悟"], 
+    ["17","資材部","資材１課","係長","野神裕一"], 
+    ["18","資材部","資材１課","主任","三浦裕太"], 
+    ["19","資材部","資材３課","課長","更科潤一郎"], 
+    ["20","資材部","資材３課","主任","坂井秀行"], 
+    ["21","資材部","部品サ－ビス課","課長","坂詰大輔"], 
+    ["22","資材部","部品サ－ビス課","係長","斎藤幸彦"], 
+    ["23","資材部","部品サ－ビス課","主任","渡部篤郎"], 
+    ["24","資材部","","次長","中村信一"], 
+    ["25","資材部","","部長","小出伸行"], 
+    ["26","車両事業部","首都圏グループ","課長","阿部裕之"], 
+    ["27","車両事業部","首都圏グループ（１課）","係長","遠藤和弥"], 
+    ["28","車両事業部","首都圏グループ（１課）","係長","石田仁志"], 
+    ["29","車両事業部","首都圏グループ（１課兼任","G長","落合泰隆"], 
+    ["30","車両事業部","首都圏グループ（２課）","課長","山際裕"], 
+    ["31","車両事業部","首都圏グループ（2課）","主任","馬場雄佑"], 
+    ["32","車両事業部","西日本グループ","G長","小山徹"], 
+    ["33","車両事業部","西日本グループ","課長","高野与志信"], 
+    ["34","車両事業部","西日本グループ","係長","市川進"], 
+    ["35","車両事業部","東日本グループ","G長","齋藤篤"], 
+    ["36","車両事業部","東日本グループ","課長","鈴木淳"], 
+    ["37","車両事業部","東日本グループ","主任","熊倉研太"], 
+    ["38","車両事業部","販売促進室","次長","北村健"], 
+    ["39","車両事業部","部長","部長","佐野吉男"], 
+    ["40","車両事業本部","","本部長","原康雄"], 
+    ["41","出向","北 村ＴＣＳ","課長","寺山寿俊"], 
+    ["42","出向","北 村ＴＣＳ","次長","石田俊輔"], 
+    ["43","出向","北 村ＴＣＳ","主任","山田晃嗣"], 
+    ["44","商品企画部","CN推進課","係長","稲垣偉人"], 
+    ["45","商品企画部","次長","次長","佐藤要"], 
+    ["46","商品企画部","商品企画課","主任","長谷川快"], 
+    ["47","商品企画部","部長","部長","米本英喜"], 
+    ["48","生産技術部","環境安全課","課長","迫田友和"], 
+    ["49","生産技術部","環境安全課","主任","塚田野乃夏"], 
+    ["50","生産技術部","生産技術課","課長","大倉義明"], 
+    ["51","生産技術部","生産技術課","主任","五十嵐大輔"], 
+    ["52","生産技術部","電気設計課","係長","吉田崇之"], 
+    ["53","生産技術部","電気設計課","主任","長谷川真俊"], 
+    ["54","生産技術部","","次長","庭山学"], 
+    ["55","製造第一部","T-1班","班長","石井貴志"], 
+    ["56","製造第一部","T-3班","班長","吉村直也"], 
+    ["57","製造第一部","T-5班","班長","石山知広"], 
+    ["58","製造第一部","T-7班","班長","小林尚仁"], 
+    ["59","製造第一部","T-8班","班長","遠藤繁"], 
+    ["60","製造第一部","T-9班","班長","早川大弥"], 
+    ["61","製造第一部","次長","次長","大澤博之"], 
+    ["62","製造第一部","生産管理課","主任","木山大輔"], 
+    ["63","製造第一部","製造１課","課長","富樫健一"], 
+    ["64","製造第一部","製造１課","係長","長﨑知広"], 
+    ["65","製造第一部","製造１課","係長","大野猛"], 
+    ["66","製造第一部","製造２課","課長","阿部洋樹"], 
+    ["67","製造第一部","製造２課","係長","佐久間宏行"], 
+    ["68","製造第一部","製造２課","係長","竹田寛行"], 
+    ["69","製造第一部","部長","部長","曽我謙治"], 
+    ["70","製造第五部","A-1班","班長","小林満"], 
+    ["71","製造第五部","A-2班","班長","近宏明"], 
+    ["72","製造第五部","A-3班","班長","丸山嘉徳"], 
+    ["73","製造第五部","A-5班","班長","菊池良"], 
+    ["74","製造第五部","A-6班","班長","島田正一"], 
+    ["75","製造第五部","修理特殊課","課長","本間健"], 
+    ["76","製造第五部","生産管理課","係長","峯本武明"], 
+    ["77","製造第五部","製造１課","課長","土田栄治"], 
+    ["78","製造第五部","製造２課","課長","駒澤良太"], 
+    ["79","製造第五部","","部長","高野栄司"], 
+    ["80","製造第三部","P-1班","班長","近拓郎"], 
+    ["81","製造第三部","P-2班","班長","奥健二"], 
+    ["82","製造第三部","P-3班","班長","岩渕正和"], 
+    ["83","製造第三部","P-5班","班長","小野悠也"], 
+    ["84","製造第三部","製造１課","課長","長谷川智一"], 
+    ["85","製造第三部","製造１課","係長","泉田長太郎"], 
+    ["86","製造第三部","製造２課","課長","岡田洋介"], 
+    ["87","製造第三部","製造２課","係長","小林祐嗣"], 
+    ["88","製造第三部","","部長","佐々木幸一"], 
+    ["89","製造第二部","S-2班","班長","宮﨑洋"], 
+    ["90","製造第二部","S-3班","班長","五十嵐雅之"], 
+    ["91","製造第二部","S-7班","班長","首藤将"], 
+    ["92","製造第二部","生産管理課","課長","伊藤隆"], 
+    ["93","製造第二部","生産管理課","主任","井崎妙子"], 
+    ["94","製造第二部","製造課","課長","小林正明"], 
+    ["95","製造第二部","製造課","係長","髙綱健太"], 
+    ["96","製造第二部","製造課","係長","島垣勝宣"], 
+    ["97","製造第二部","製造課","主任","小林誠"], 
+    ["98","製造本部","","副本部長","五十嵐光洋"], 
+    ["99","製造本部","","本部長","梨本明彦"], 
+    ["100","総務部","経理課","課長","幸田記一"], 
+    ["101","総務部","経理課","主任","渡部雅之"], 
+    ["102","総務部","経理課","主任","大澤真由美"], 
+    ["103","総務部","次長","次長","神田和馬"], 
+    ["104","総務部","人事課","係長","金子弘明"], 
+    ["105","総務部","総務課","課長","保苅知子"], 
+    ["106","総務部","部長","部長","平嶺信彦"], 
+    ["107","通信NWS部","工事支援センター","課長","小柳哲哉"], 
+    ["108","通信NWS部","工事支援センター","係長","圓山達也"], 
+    ["109","通信NWS部","工事支援センター","主任","田村高広"], 
+    ["110","通信NWS部","西日本センター","課長","眞部一志"], 
+    ["111","通信NWS部","西日本センター","係長","板井績明"], 
+    ["112","通信NWS部","西日本センター","係長","荒木太朗"], 
+    ["113","通信NWS部","西日本センター","係長","山本和樹"], 
+    ["114","通信NWS部","西日本センター","主任","草場祥"], 
+    ["115","通信NWS部","中日本センター","課長","北畑秀和"], 
+    ["116","通信NWS部","中日本センター","係長","池田雄一"], 
+    ["117","通信NWS部","中日本センター","係長","市成賢太"], 
+    ["118","通信NWS部","中日本センター","主任","本望哲也"], 
+    ["119","通信NWS部","中日本センター","主任","小柳徹弥"], 
+    ["120","通信NWS部","中日本センター","主任","鶴巻和"], 
+    ["121","通信NWS部","東日本センター","係長","土田太朗"], 
+    ["122","通信NWS部","部長","部長","関本政美"], 
+    ["123","通信NWS部","部長","部長","加藤義隆"], 
+    ["124","通信事業部","メンテナンスグループ","課長","上田正太郎"], 
+    ["125","通信事業部","メンテナンスグループ","係長","佐藤勧謙"], 
+    ["126","通信事業部","営業支援室","課長","河上慎一郎"], 
+    ["127","通信事業部","次長","次長","髙野敏幸"], 
+    ["128","通信事業部","西日本グループ","課長","庭尾明範"], 
+    ["129","通信事業部","西日本グループ","課長","齋藤弘一郎"], 
+    ["130","通信事業部","西日本グループ","主任","貞包洋伸"], 
+    ["131","通信事業部","中日本グループ","課長","小池宏明"], 
+    ["132","通信事業部","中日本グループ","課長","渋谷拓"], 
+    ["133","通信事業部","中日本グループ","課長","品田純男"], 
+    ["134","通信事業部","中日本グループ","主任","細野恭平"], 
+    ["135","通信事業部","東日本グループ","係長","名木野良"], 
+    ["136","通信事業部","東日本グループ","係長","長尾翔太"], 
+    ["137","通信事業部","部長","部長","石川大介"], 
+    ["138","通信事業部","部長","部長","山際秀幸"], 
+    ["139","通信事業本部","","本部長","牧野浩幸"], 
+    ["140","特殊車両事業部","営業企画グループ","係長","豊島裕之"], 
+    ["141","特殊車両事業部","次長","次長","関矢俊"], 
+    ["142","特殊車両事業部","次長","次長","佐々木和弘"], 
+    ["143","特殊車両事業部","部長","部長","中林暁"], 
+    ["144","品質保証部","品質保証１課","課長","見田龍也"], 
+    ["145","品質保証部","品質保証１課","係長","鈴木淳"], 
+    ["146","品質保証部","品質保証１課","係長","丸山孝治"], 
+    ["147","品質保証部","品質保証１課","主任","吉田壮介"], 
+    ["148","品質保証部","品質保証２課","課長","小柳貴史"], 
+    ["149","品質保証部","品質保証２課","主任","関川敦也"], 
+    ["150","品質保証部","品質保証２課","主任","佐藤雄斗"], 
+    ["151","品質保証部","品質保証３課","主任","川又大生"], 
+    ["152","品質保証部","部長","部長","四柳健治"] 
+];
+    // ※実際にはここに157名分の配列がすべて入ります。
+
+    // テーブル生成
+    const tbody = document.getElementById('member-list');
+    members.forEach(m => {
+        let row = `<tr><td>${m[0]}</td><td>${m[1]}</td><td>${m[2]}</td><td>${m[3]}</td><td>${m[4]}</td></tr>`;
+        tbody.innerHTML += row;
+    });
+
+    // アコーディオン制御
+    var acc = document.getElementsByClassName("accordion");
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            panel.style.display = (panel.style.display === "block") ? "none" : "block";
+        });
+    }
+</script>
 </body>
 
 </html>
