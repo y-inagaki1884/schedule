@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <title>第2回 CN勉強会</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 10px;
+            font-size: 24px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-top: 30px;
+            border-left: 5px solid #27ae60;
+            padding-left: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        .link-btn {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-btn:hover {
+            text-decoration: underline;
+        }
+
+        .link-btn2 {
+            color: #097c53;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-btn2:hover {
+            text-decoration: underline;
+        }
+
+        /* ガントチャート風スタイル */
+        .gantt-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .gantt-table {
+            width: 100%;
+            min-width: 700px;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .gantt-table th {
+            background: #34495e;
+            color: white;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .gantt-table td {
+            height: 50px;
+            position: relative;
+            border: 1px solid #eee;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .bar-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bar-period {
+            background-color: #27ae60;
+            height: 24px;
+            border-radius: 12px;
+            position: absolute;
+            top: 13px;
+            left: 0%;
+            /* 1/26開始想定 */
+            width: 100%;
+            /* 4週間分想定 */
+            color: white;
+            line-height: 24px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .date-label {
+            font-size: 18px;
+            color: #570ce4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>第2回CN勉強会の案内</h1>
+
+        <h2>1. 受講対象者</h2>
+        <ul>
+            <li><strong>全国の従業員：</strong> 主任職以上</li>
+            <li><strong>工場勤務者：</strong> 班長職以上</li>
+        </ul>
+        <section>
+
+        </section>
+        <h2>2. 受講内容・各フォームURL</h2>
+        <p style="margin-top: 25px; font-size: 1.0em; color: #c0392b;">
+            所属する”部・課名”もしくは”班名”と、氏名の記入をお願いします。
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">項目</th>
+                    <th>リンクURL</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. 教育動画視聴</strong></td>
+                    <td colspan="2">
+                        <a href="https://mskitamurass.sharepoint.com/:v:/s/CN495/IQBZMmfwijU2TYXhsPioBWoWAWEsJAu5er1B88qYE5EdGxA?e=w0NCLH"
+                            target="_blank" class="link-btn">▶ ＣＮ勉強会 動画【字幕付き】</a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>2. 理解度チェック</strong></td>
+                    <td><a href="https://forms.office.com/r/GVCiYeGz4P" target="_blank" class="link-btn">理解度チェックフォーム</a>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><strong>3. アンケート</strong></td>
+                    <td><a href="https://forms.office.com/r/tnQqaLREFF" target="_blank" class="link-btn">アンケート回答フォーム</a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h2>3. 実施スケジュール（4週間）</h2>
+        <div class="gantt-container">
+            <table class="gantt-table">
+                <thead>
+                    <tr>
+                        <th style="width: 150px;">2026年</th>
+                        <th>3月 第4週</th>
+                        <th>4月 第1週</th>
+                        <th>4月 第2週</th>
+                        <th>4月 第3週</th>
+                        <th>4月 第4週</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="date-label">3/23(月)～4/24(金)</td>
+                        <td colspan="5">
+                            <div class="bar-wrapper">
+                                <div class="bar-period">全対象者：受講・回答期間（4週間）</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="margin-top: 25px; font-size: 0.9em; color: #c0392b;">
+            ※期限間際は混雑が予想されます。余裕を持った受講をお願いいたします。
+        </p>
+
+        <h2>4.集計結果</h2>
+        <div class="gantt-container">
+            <ul>
+                <li><strong><a href="cnt2_report.html"  class="link-btn">集計結果を確認する</a>
+                    </strong></li>
+            </ul>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

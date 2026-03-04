@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>第2回 CN勉強会 実施結果総合レポート</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #1a365d;
+            border-bottom: 4px solid #27ae60;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 20px;
+            border-left: 6px solid #27ae60;
+            padding-left: 15px;
+            margin-top: 40px;
+            background: #f8f9fa;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        /* サマリーパネル */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            /* 4カラム固定 */
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 800px) {
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* スマホ・タブレット時は2列 */
+        }
+
+        .stat-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 5px solid #27ae60;
+        }
+        .stat-card2 {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 5px solid #2785ae;
+        }
+
+        .stat-val {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2d3748;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #718096;
+            font-weight: bold;
+        }
+
+        /* スコア表示 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background: #edf2f7;
+            color: #4a5568;
+        }
+
+        .score-bar-bg {
+            background: #eee;
+            border-radius: 10px;
+            height: 12px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .score-bar-fill {
+            background: #27ae60;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        /* 自由記述分析 */
+        .analysis-box {
+            background: #f0fff4;
+            border: 1px solid #c6f6d5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .alert {
+            background: #fff5f5;
+            border-left: 5px solid #f56565;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f7f9;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: 20px;
+            color: #1a365d;
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .category-group {
+            margin-bottom: 30px;
+        }
+
+        .category-title {
+            background: #27ae60;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        tr:nth-child(even) {
+            background: #fcfdfd;
+        }
+
+        .important {
+            color: #c53030;
+            font-weight: bold;
+            background: #fff5f5;
+        }
+
+        .success {
+            color: #2f855a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>CNに関する社内教育 実施結果 第02回（2026/3～）最終報告</h1>
+        <h3 class="btn btn-danger">集計は完了していません。</h3>
+        <section>
+            <h2>1. 受講進捗サマリー</h2>
+            <div class="summary-grid">
+                <div class="stat-card">
+                    <span class="stat-label">受講対象者</span>
+                    <span class="stat-val">** <small>名</small></span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">理解度チェック回答率</span>
+                    <span class="stat-val">** <small>%</small></span>
+                    <span style="font-size:12px; color:#666;">(**件/**名 ※班回答含む)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">アンケート回答率</span>
+                    <span class="stat-val">** <small>%</small></span>
+                    <span style="font-size:12px; color:#666;">(**件/**名)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">理解度テスト平均点</span>
+                    <span class="stat-val">** <small>点</small></span>
+                </div>
+            </div>
+
+
+        </section>
+        
+        <p style="font-size: 13px; color: #666; margin-top: 10px;">
+            ※<strong>***</strong>名の対象（班長・主任以上）対して<strong>***</strong>％の受講率でした。</p>
+        
+
+        <section>
+            <h2>2. 理解度チェック設問別正答率（T結果）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 70%;">設問内容</th>
+                        <th>平均正答率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>なぜ今カーボンニュートラルへの取り組みが私たちの未来にとって不可欠なのでしょうか？</td>
+                        <td><strong>***%</strong>
+                            <div class="score-bar-bg">
+                                <div class="score-bar-fill" style="width: 99%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>このまま温室効果ガスの排出が続いた場合、2050年に直面する可能性のある危機として挙げられているものはどれですか？</td>
+                        <td><strong>***%</strong>
+                            <div class="score-bar-bg">
+                                <div class="score-bar-fill" style="width: 98%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>カーボンニュートラル実現に向けた挑戦において、大企業と並んで「中心的存在」とされているのは誰ですか？</td>
+                        <td><strong>***%</strong>
+                            <div class="score-bar-bg">
+                                <div class="score-bar-fill" style="width: 99%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>中小企業がカーボンニュートラルに取り組むための具体的な方法として、資料で挙げられていないものはどれですか？</td>
+                        <td><strong>***%</strong>
+                            <div class="score-bar-bg">
+                                <div class="score-bar-fill" style="width: 99%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>従業員一人ひとりができるCO2排出量削減の行動例として、どのようなことが挙げられていますか？</td>
+                        <td><strong>***%</strong>
+                            <div class="score-bar-bg">
+                                <div class="score-bar-fill" style="width: 97%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>「自分ひとりの力では変わらない」と感じる人に対し、この動画はどのようなメッセージを伝えていますか？</td>
+                        <td><strong>***%</strong>
+                            <div class="score-bar-bg">
+                                <div class="score-bar-fill" style="width: 97%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>このまま温室効果ガスの排出が続いた場合、2030年に起こりうると予測されている社会的な問題はどれですか？</td>
+                        <td><strong>***%</strong>
+                            <div class="score-bar-bg">
+                                <div class="score-bar-fill" style="width: 97%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>なぜ中小企業の「現場発の改善」が、カーボンニュートラル実現において重要だと述べられていますか？</td>
+                        <td><strong>***%</strong>
+                            <div class="score-bar-bg">
+                                <div class="score-bar-fill" style="width: 97%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>3. 学習エクスペリエンス評価（A結果：5点満点）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>評価項目</th>
+                        <th>平均スコア</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>動画の内容は分かりやすかったか</td>
+                        <td><strong>***</strong></td>
+                    </tr>
+                    <tr>
+                        <td>「カーボンニュートラル」を、いますぐ始める必要があるのかは理解できましたか？</td>
+                        <td><strong>***</strong></td>
+                    </tr>
+                    
+                    
+                </tbody>
+            </table>
+            <p style="font-size: 13px; color: #666; margin-top: 10px;">※動画の長さについては、***%が「適切」と回答。短編形式が極めて有効に機能しました。</p>
+        </section>
+        <section>
+            <p>今後の希望教育スタイル（n=***, 複数回答）</p>
+            <p>次回の教育形式について、以下の通りの支持が得られました。</p>
+
+            <div class="style-grid">
+                <div class="style-item">
+                    <span class="style-name">eラーニング（動画） 【***%】</span>
+                    <p style="font-size:13px;">「業務の合間にできる」「短時間で集中できる」との理由で圧倒的多数の支持。現在のマイクロラーニング形式の継続が望まれています。</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <section>
+            <h2>4. 受講者フィードバック・傾向分析</h2>
+            <div class="analysis-box">
+                <span class="tag">ポジティブ傾向</span>
+                <p style="font-size: 14px;">
+                    ---
+                </p>
+
+                <span class="tag" style="background:#4a5568;">課題と要望</span>
+                <ul style="font-size: 14px; padding-left: 20px;">
+                    <li><strong>自分事化の壁：</strong> ---
+                    </li>
+                    <li><strong>継続教育への意欲：</strong> ---</li>
+                    <li><strong>環境意識の多様性：</strong> ---</li>
+                </ul>
+            </div>
+
+            <div class="alert">
+                <strong>【事務局からの重要事項】</strong><br>
+                ---
+            </div>
+        </section>
+    </div>
+
+
+    <div class="card">
+        <h1>自由記述フィードバック 系統別分類リスト</h1>
+
+        <div class="category-group">
+            <div class="category-title">【系統A】動画形式・配信方法への評価</div>
+            <table>
+                <tr>
+                    <td class="success">・---）</td>
+                </tr>
+                
+            </table>
+        </div>
+
+        <div class="category-group">
+            <div class="category-title">【系統B】教材内容の不備・具体的な改善指摘</div>
+            <table>
+                <tr>
+                    <td class="important">・---</td>
+                </tr>
+                
+            </table>
+        </div>
+
+        <div class="category-group">
+            <div class="category-title">【系統C】今後の教育頻度・学習スタイルへの要望</div>
+            <table>
+                <tr>
+                    <td>・---</td>
+                </tr>
+                
+            </table>
+        </div>
+
+        <div class="category-group">
+            <div class="category-title">【系統D】会社・社会の取り組み、意識改革への意見</div>
+            <table>
+                <tr>
+                    <td>・---</td>
+                </tr>
+                
+            </table>
+        </div>
+
+        <div class="category-title">【全数】</div>
+        <table>
+            
+            
+            <tr>
+                <td>・---
+                </td>
+            </tr>
+            
+        </table>
+
+    </div>
+
+
+</body>
+
+</html>
